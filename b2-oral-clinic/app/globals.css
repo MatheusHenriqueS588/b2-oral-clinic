@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Design Tokens ─────────────────────────────────────────── */
+@theme {
+  /* Brand Colors */
+  --color-primary:     #111111;
+  --color-secondary:   #2A2A2A;
+  --color-warm:        #F5F3EE;
+  --color-accent:      #C6A97A;
+  --color-accent-dark: #A88B5A;
+  --color-accent-dim:  rgba(198,169,122,0.15);
+  --color-text:        #EAEAEA;
+  --color-muted:       #8A8A8A;
+
+  /* Fonts */
+  --font-heading: var(--font-poppins), 'Poppins', system-ui, sans-serif;
+  --font-body:    var(--font-inter),   'Inter',   system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ─── Base ───────────────────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  background-color: #F5F3EE;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Custom scrollbar ───────────────────────────────────────── */
+::-webkit-scrollbar          { width: 5px; }
+::-webkit-scrollbar-track    { background: #111111; }
+::-webkit-scrollbar-thumb    { background: #C6A97A; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #A88B5A; }
+
+/* ─── Selection ──────────────────────────────────────────────── */
+::selection {
+  background: rgba(198, 169, 122, 0.3);
+  color: #111111;
+}
+
+/* ─── Noise texture overlay ──────────────────────────────────── */
+.noise-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Gold line accent ───────────────────────────────────────── */
+.gold-line {
+  display: inline-block;
+  width: 3rem;
+  height: 1px;
+  background: #C6A97A;
+}
+
+/* ─── Section padding ────────────────────────────────────────── */
+.section-padding {
+  padding-top: 7rem;
+  padding-bottom: 7rem;
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+}
+
+/* ─── Typography helpers ─────────────────────────────────────── */
+.heading-display {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+.heading-lg {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
 }
